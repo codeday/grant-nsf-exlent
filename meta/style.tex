@@ -1,0 +1,39 @@
+\graphicspath{ {./images/} }
+\pagenumbering{gobble}
+\tolerance9000
+% PAPPG 2.B.2, margins must be 1 inch.
+\geometry{paper=letterpaper, margin=1in}
+
+
+\newcolumntype{L}[1]{>{\hsize=#1\hsize\RaggedRight} X}
+
+\renewcommand{\footnotesize}{\small\spaceskip4pt plus1.5pt}
+
+\setcounter{secnumdepth}{-1}
+
+\patchcmd{\thebibliography}{\section*{\refname}}{}{}{}
+
+\titleformat{\section}[hang]
+  {\normalfont\normalsize\bfseries\centering\uppercase}{\thesection.}{1em}{}
+\titleformat{\subsection}
+  {\normalfont\normalsize\bfseries}{\thesubsection.}{1em}{}
+\titleformat{\subsubsection}
+  {\normalfont\normalsize\itshape}{\thesubsubsection.}{1em}{}
+
+
+\MakeOuterQuote{"}
+
+\AtBeginDocument{%
+  \providecommand\BibTeX{{%
+    \normalfont B\kern-0.5em{\scshape i\kern-0.25em b}\kern-0.8em\TeX}}}
+
+\let\origfootnotemark\footnotemark
+\renewcommand{\footnotemark}[1][]{%
+    \ifthenelse{\equal{#1}{}}{%
+        \origfootnotemark%
+    }{%
+        \def\nextitem{\def\nextitem{\textsuperscript{,}}}% Separator
+        \renewcommand*{\do}[1]{\nextitem\origfootnotemark[##1]}% How to process each item
+        \docsvlist{#1}% Process list
+    }%
+}

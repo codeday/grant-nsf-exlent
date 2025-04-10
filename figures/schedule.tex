@@ -1,0 +1,61 @@
+\begin{figure}[H]
+    \begin{ganttchart}[
+        vgrid,
+        x unit=1cm,
+        title/.style={draw=none, fill=none},
+        bar/.append style={rounded corners=3pt},
+        bar left shift=.15,
+        bar right shift=-.15,
+        bar top shift=.3,
+        bar height=.3,
+        group top shift=.9,
+        group height=.1,
+        group peaks height=.2,
+        group left shift=0,
+        group right shift=0,
+        group peaks tip position=0,
+        milestone top shift=0.24
+    ]{1}{12}
+        \gantttitlelist[
+            title list options=%
+                {var=\y, evaluate=\y as \x%
+                using "\pgfcalendarmonthshortname{\y}"}
+            ]{9,10,11,12,1,2,3,4,5,6,7,8}{1}
+
+        \\
+
+        \ganttbar{Cohort Activities}{1}{10}
+        
+        \\
+        
+        \ganttgroup[inline]{\normalfont (choose one)}{2}{3}
+        \ganttgroup[inline]{\normalfont (choose one)}{6}{8}
+        
+        \\
+        
+        \foreach \n [count=\ni] in {2,3,6,7,8}{
+            \ifnum\ni=1
+                \ganttbar{Micro-Internship}{\n}{\n.99}
+            \else
+                \ganttbar{}{\n}{\n.99}
+            \fi
+            \ganttmilestone[milestone/.append style={shape=ellipse, anchor=east, xshift=-18pt, xscale=0.15, yscale=0.3}]{}{\n}
+            \ganttmilestone[milestone/.append style={shape=ellipse, anchor=east, xshift=-12pt, xscale=0.15, yscale=0.3}]{}{\n}
+            \ganttmilestone[milestone/.append style={shape=ellipse, anchor=east, xshift=-7pt, xscale=0.15, yscale=0.3}]{}{\n}
+        }
+
+        \\
+
+        \ganttbar{Career Mentoring}{3}{10}
+        \foreach \n in {3,...,10}{
+            \ganttmilestone[milestone/.append style={shape=ellipse, anchor=east, xshift=-15pt, xscale=0.15, yscale=0.3}]{}{\n}
+            \ganttmilestone[milestone/.append style={shape=ellipse, anchor=east, xshift=-8pt, xscale=0.15, yscale=0.3}]{}{\n}
+        }
+    \end{ganttchart} \\
+    \centering \small \textit{
+        $\bullet$ = meeting with industry mentor
+    }
+    
+    \caption{Calendar for each of the three yearly cohorts.}
+    \label{fig:cohortCalendar}
+\end{figure}
